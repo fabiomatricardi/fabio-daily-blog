@@ -1,6 +1,8 @@
 # FABIO DAILY BLOG
 ### Daily notes brainstorming and ideas
 
+<img src='https://github.com/fabiomatricardi/fabio-daily-blog/raw/main/brainstorming.jpg' width=900>
+
 ---
 
 ## Table of Contents
