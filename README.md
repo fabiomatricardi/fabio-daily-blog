@@ -5,10 +5,11 @@
 
 ---
 
+<a id="toc"></a> 
 ## Table of Contents
 - [Can you build a blog with Gradio?](#gradioblog)
 - [Creating Markdown Internal Links](#createmarkdownlinks) 
-
+- [Cool gradio examples](#coolgradio)
 
 
 ---
@@ -63,6 +64,9 @@ with gr.Blocks(title="Gradio Blog Editor") as demo:
 demo.launch()
 ```
 
+
+[Bak to Table of Contents](#toc)
+
 ---
 
 
@@ -106,8 +110,25 @@ To install the package do...
 ```
 Clicking “Go to Installation” will take the user to the “Installation” section.
 
+[Bak to Table of Contents](#toc)
 
 ---
+
+<a id="coolgradio"></a> 
+## Cool gradio examples
+From the official repository a collection of demos, to learn.
+
+[https://github.com/gradio-app/gradio/tree/main/demo](https://github.com/gradio-app/gradio/tree/main/demo)
+
+<img src='https://github.com/fabiomatricardi/fabio-daily-blog/raw/main/gradioExamples.jpg' width=800>
+
+[Bak to Table of Contents](#toc)
+
+---
+
+
+
+
 
 
 
