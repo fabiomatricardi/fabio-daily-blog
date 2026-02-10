@@ -10,6 +10,8 @@
 - [Can you build a blog with Gradio?](#gradioblog)
 - [Creating Markdown Internal Links](#createmarkdownlinks) 
 - [Cool gradio examples](#coolgradio)
+- [LSP server for Sublime Text 3 to suggest python libraries arguments](#lsp)
+- [Gradio multi-pages app](#gradiomultipages)
 
 
 ---
@@ -126,7 +128,115 @@ From the official repository a collection of demos, to learn.
 
 ---
 
+<img src='https://wxguy.in/assets/img/sublime_text/sublime_text_4.webp' width=800>
 
+<a id="lsp"></a> 
+## LSP server for Sublime Text 3 to suggest python libraries arguments
+To enable code hints (autocompletion and documentation) for imported Python libraries in Sublime Text 3, you need to install and configure a third-party package like LSP with a Python language server (such as pyls or pyright) or the older, but still functional, Anaconda plugin. Using the Language Server Protocol (LSP) client is the modern and recommended approach. 
+
+#### Option 1: Using LSP (Recommended)
+The Language Server Protocol (LSP) provides a robust way to get IDE-like features in Sublime Text. <br>
+Install Package Control: If you don't have it, follow the instructions on the Package Control website to install it.<br>
+Install the LSP package:
+```
+Open the Command Palette with Ctrl+Shift+P (Windows/Linux) or Cmd+Shift+P (Mac).
+Type "Package Control: Install Package" and select it.
+Search for `LSP` and install the package.
+```
+Install a Python Language Server: <br>
+You need a language server installed on your system (not in Sublime Text). Popular choices include `pyls` (Python Language Server) or `pyright`.
+```
+Install one using pip: `pip install python-language-server or pip install pyright`.
+Install an LSP-Python helper package in Sublime Text:
+Open the Command Palette again.
+Select "Package Control: Install Package".
+Search for and install a relevant helper package, such as "LSP-pyright" or just "LSP-python".
+```
+
+Enable the server in Sublime Text:<br>
+Once installed, you may need to enable the server globally via the Command Palette: "LSP: Enable Language Server Globally".<br>
+You might also need to configure the settings to point to the correct Python interpreter path, especially if using a virtual environment. <br>
+This can be done in Preferences > Package Settings > LSP > Settings. 
+
+
+Refer to 
+- [https://wxguy.in/posts/sublime-text-as-python-ide/](https://wxguy.in/posts/sublime-text-as-python-ide/)
+- [https://lsp.sublimetext.io/](https://lsp.sublimetext.io/)
+
+
+[Bak to Table of Contents](#toc)
+
+---
+
+<a id="gradiomultipages"></a> 
+## Gradio Multi-pages app
+refer to [https://www.gradio.app/guides/multipage-apps](https://www.gradio.app/guides/multipage-apps)
+
+Your Gradio app can support multiple pages with the Blocks.route() method.
+
+All of these pages will share the same backend, including the same queue.
+
+> **Note: multipage apps do not support interactions between pages, e.g. an event listener on one page cannot output to a component on another page. Use gr.Tabs() for this type of functionality instead of pages**.
+
+#### Separate Files
+
+For maintainability, you may want to write the code for different pages in different files. Because any Gradio Blocks can be imported and rendered inside another Blocks using the .render() method, you can do this as follows.
+
+Create one main file, say app.py and create separate Python files for each page:
+```
+- app.py
+- main_page.py
+- second_page.py
+```
+The Python file corresponding to each page should consist of a regular Gradio Blocks, Interface, or ChatInterface application, e.g.
+
+**main_page.py**
+```python
+import gradio as gr
+
+with gr.Blocks() as demo:
+    gr.Image()
+
+if __name__ == "__main__":
+    demo.launch()
+```
+
+**second_page.py**
+```python
+import gradio as gr
+
+with gr.Blocks() as demo:
+    t = gr.Textbox()
+    demo.load(lambda : "Loaded", None, t)
+
+if __name__ == "__main__":
+    demo.launch()
+```
+
+#### In your main app.py file, simply import the Gradio demos from the page files and .render() them:
+
+**app.py**
+```python
+import gradio as gr
+
+import main_page, second_page
+
+with gr.Blocks() as demo:
+    main_page.demo.render()
+with demo.route("Second Page"):
+    second_page.demo.render()
+
+if __name__ == "__main__":
+    demo.launch()
+```
+
+This allows you to run each page as an independent Gradio app for testing, while also creating a single file app.py that serves as the entrypoint for the complete multipage app.
+
+#### ⚠️❗ Remember that all the single apps must be called `demo` and only the main app.py will call for the `.launch()` arguments
+
+[Bak to Table of Contents](#toc)
+
+---
 
 
 
