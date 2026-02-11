@@ -334,6 +334,8 @@ from [https://github.com/leejet/stable-diffusion.cpp/blob/master/docs/flux2.md](
 <img alt="flux2-klein-base-9b" src="https://github.com/leejet/stable-diffusion.cpp/raw/master/assets/flux2/flux2-klein-base-9b.png" />
 
 
+[Bak to Table of Contents](#toc)
+
 ---
 
 
